@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Post, PostImage
-
+from django.contrib.auth.models import User
 
 class PostImageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,3 +34,16 @@ class PostCreateSerializer(serializers.ModelSerializer):
         for img in images:
             PostImage.objects.create(post=post, image=img)
         return post
+    
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, min_length=6)
+
+    class Meta:
+        model = User
+        fields = ["id", "username", "password"]
+
+    def create(self, validated_data):
+        user = User(username=validated_data["username"])
+        user.set_password(validated_data["password"])
+        user.save()
+        return user
