@@ -60,7 +60,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     
-] + MIDDLEWARE
+]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
