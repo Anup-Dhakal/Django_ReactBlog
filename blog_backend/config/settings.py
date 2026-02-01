@@ -26,7 +26,12 @@ SECRET_KEY = "django-insecure-z)m^p#ty34qdj23fw8ez80%=p4imn%w5t1%vhdf5zp9(x@(6p5
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "0") == "1"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "django-reactblog.onrender.com",
+]
+
 
 
 
