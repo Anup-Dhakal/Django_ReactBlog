@@ -3,9 +3,18 @@ from .models import Post, PostImage
 from django.contrib.auth.models import User
 
 class PostImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = PostImage
         fields = ["id", "image", "uploaded_at"]
+
+    def get_image(self, obj):
+        # This returns the real URL from the storage backend.
+        # With Cloudinary enabled, this becomes https://res.cloudinary.com/...
+        if obj.image:
+            return obj.image.url
+        return None
 
 
 class PostSerializer(serializers.ModelSerializer):
