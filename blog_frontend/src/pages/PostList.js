@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../api";
 import { getDemoPosts } from "../demoPosts";
+import { BACKEND_ORIGIN } from "../api";
 
 export default function PostList() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const backendBase = `http://${window.location.hostname}:8000`;
+  const backendBase =  BACKEND_ORIGIN;;
 
   async function load() {
     setLoading(true);

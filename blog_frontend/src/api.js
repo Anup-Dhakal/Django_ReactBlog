@@ -1,9 +1,17 @@
 import axios from "axios";
 
-const HOST = window.location.hostname;
+const API_BASE = process.env.REACT_APP_API_URL; // must end with /api/
+
+if (!API_BASE) {
+  console.warn("Missing REACT_APP_API_URL. Set it in .env and Vercel env vars.");
+}
+
+const BACKEND_ORIGIN = API_BASE ? new URL(API_BASE).origin : "";
+
+export { BACKEND_ORIGIN };
 
 export const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: API_BASE,
 });
 
 // ---- Token helpers ----
@@ -25,9 +33,7 @@ export function clearTokens() {
 // ---- Request interceptor: attach access token ----
 api.interceptors.request.use((config) => {
   const token = getAccessToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
@@ -65,7 +71,8 @@ api.interceptors.response.use(
 
       refreshing = true;
       try {
-        const resp = await axios.post(`http://${HOST}:8000/api/token/refresh/`, {
+        // ✅ Use backend origin from env var (works on Vercel + local)
+        const resp = await axios.post(`${BACKEND_ORIGIN}/api/token/refresh/`, {
           refresh,
         });
 
