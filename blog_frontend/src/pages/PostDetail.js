@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { api } from "../api";
 import { useAuth } from "../auth/AuthContext";
 import { getDemoPostById, deleteDemoPost } from "../demoPosts";
-
+import { BACKEND_ORIGIN } from "../api";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 export default function PostDetail() {
@@ -14,7 +14,7 @@ export default function PostDetail() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const backendBase = `http://${window.location.hostname}:8000`;
+  const backendBase =  BACKEND_ORIGIN;
   const isDemo = String(id).startsWith("demo-");
 
   useEffect(() => {

@@ -8,7 +8,7 @@ export default function PostList() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const backendBase =  BACKEND_ORIGIN;;
+  const backendBase =  BACKEND_ORIGIN;
 
   async function load() {
     setLoading(true);
