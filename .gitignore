@@ -1,0 +1,27 @@
+# ---- ENV FILES ----
+.env
+.env.*
+!.env.example
+
+# ---- PYTHON ----
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+env/
+ENV/
+
+# ---- DJANGO ----
+db.sqlite3
+media/
+staticfiles/
+
+# ---- NODE / REACT ----
+node_modules/
+build/
+dist/
+
+# ---- OS / EDITOR ----
+.DS_Store
+.vscode/
+.idea/

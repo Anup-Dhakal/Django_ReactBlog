@@ -21,13 +21,13 @@ export default function CreatePost() {
 
     try {
       if (!isAuthed) {
-        // ✅ Demo post stored in sessionStorage (survives refresh, clears on tab close)
+        // Demo post stored in sessionStorage (survives refresh, clears on tab close)
         const demo = addDemoPost({ title, content, images });
         nav(`/posts/${demo.id}`);
         return;
       }
 
-      // ✅ Real post saved in Django (requires JWT)
+      //  Real post saved in Django (requires JWT)
       const form = new FormData();
       form.append("title", title);
       form.append("content", content);
